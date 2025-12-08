@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, Suspense, lazy } from "react";
+import { Routes, Route } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+// Components (Eager Load)
+import Navbar from "Components/Navbar/Navbar";
+import Footer from "Components/Footer/Footer";
+
+// Pages (Lazy Load)
+const Home = lazy(() => import("Pages/Home/Home"));
+const Contact = lazy(() => import("Pages/Contact/Contact"));
+const NotFound = lazy(() => import("Pages/NotFound/NotFound"));
 
 function App() {
-  const [count, setCount] = useState(0)
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+  }, []);
+
+  const Loading = () => (
+    <div className="min-h-screen flex items-center justify-center">Loading...</div>
+  );
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar />
+      <main className="min-h-screen">
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </main>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
