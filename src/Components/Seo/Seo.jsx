@@ -2,8 +2,9 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ title, description, keywords, image, url, schema }) => {
-  const siteTitle = "Digiopt Consulting";
-  const defaultImage = "/vite.svg"; // Change to your logo later
+  // Update this to your actual website name
+  const siteTitle = "React Template";
+  const defaultImage = "/vite.svg"; 
 
   return (
     <Helmet>

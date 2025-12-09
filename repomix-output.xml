@@ -161,7 +161,7 @@ export default {
     tailwindcss: {},
     autoprefixer: {},
   },
-}
+};
 </file>
 
 <file path="public/.htaccess">
@@ -437,11 +437,14 @@ export default App;
 </file>
 
 <file path="src/index.css">
+/* Import fonts FIRST */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Then Tailwind layers */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 html, body {
   margin: 0;
@@ -486,16 +489,16 @@ createRoot(document.getElementById('root')).render(
 
 <file path="tailwind.config.js">
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
 </file>
 
 <file path="vite.config.js">

@@ -23,13 +23,23 @@ const ContactPage = () => {
     setFileName(file ? file.name : "");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Here you will submit using fetch or axios
-    console.log("Form Data:", form);
+    // Example connection to the PHP backend
+    // const formData = new FormData();
+    // Object.keys(form).forEach(key => formData.append(key, form[key]));
+    
+    // try {
+    //   const response = await fetch('/send_email.php', { method: 'POST', body: formData });
+    //   const result = await response.json();
+    //   console.log(result);
+    // } catch (error) {
+    //   console.error("Error submitting form", error);
+    // }
 
-    alert("Form Submitted!");
+    console.log("Form Data Ready for Submission:", form);
+    alert("Form Submitted! (Check console for data)");
   };
 
   return (
@@ -39,153 +49,78 @@ const ContactPage = () => {
         className="w-full max-w-3xl bg-white shadow-xl rounded-2xl p-10 border border-gray-200"
       >
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-          Contact Us
+          Get in Touch
         </h2>
 
         {/* FIRST + LAST NAME */}
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
-              First Name
-            </label>
-            <input
-              type="text"
-              name="firstName"
-              required
-              value={form.firstName}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none"
-              placeholder="Enter first name"
-            />
+            <label className="block text-gray-700 font-semibold mb-2">First Name</label>
+            <input type="text" name="firstName" required value={form.firstName} onChange={handleChange}
+              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+              placeholder="First Name" />
           </div>
-
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
-              Last Name
-            </label>
-            <input
-              type="text"
-              name="lastName"
-              required
-              value={form.lastName}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none"
-              placeholder="Enter last name"
-            />
+            <label className="block text-gray-700 font-semibold mb-2">Last Name</label>
+            <input type="text" name="lastName" required value={form.lastName} onChange={handleChange}
+              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+              placeholder="Last Name" />
           </div>
         </div>
 
         {/* EMAIL + PHONE */}
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
-              Email Address
-            </label>
-            <input
-              type="email"
-              name="email"
-              required
-              value={form.email}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none"
-              placeholder="your@email.com"
-            />
+            <label className="block text-gray-700 font-semibold mb-2">Email Address</label>
+            <input type="email" name="email" required value={form.email} onChange={handleChange}
+              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+              placeholder="name@example.com" />
           </div>
-
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
-              Phone Number
-            </label>
-            <input
-              type="tel"
-              name="phone"
-              required
-              value={form.phone}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none"
-              placeholder="03001234567"
-            />
+            <label className="block text-gray-700 font-semibold mb-2">Phone Number</label>
+            <input type="tel" name="phone" required value={form.phone} onChange={handleChange}
+              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+              placeholder="+1 234 567 890" />
           </div>
         </div>
 
         {/* SERVICE DROPDOWN */}
         <div className="mb-6">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Select Service
-          </label>
-          <select
-            name="service"
-            required
-            value={form.service}
-            onChange={handleChange}
-            className="
-              w-full px-4 py-3 border rounded-lg bg-white
-              focus:ring-2 focus:ring-orange-400 outline-none
-            "
-          >
-            <option value="">-- Choose Service --</option>
-            <option value="Electrical Works">Electrical Works</option>
-            <option value="Cleaning Services">Cleaning Services</option>
-            <option value="AC Repair">AC Repair</option>
-            <option value="Painting">Painting</option>
+          <label className="block text-gray-700 font-semibold mb-2">Inquiry Type</label>
+          <select name="service" required value={form.service} onChange={handleChange}
+            className="w-full px-4 py-3 border rounded-lg bg-white focus:ring-2 focus:ring-blue-400 outline-none">
+            <option value="">-- Select an Option --</option>
+            <option value="General Inquiry">General Inquiry</option>
+            <option value="Support">Support</option>
+            <option value="Sales">Sales</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
         {/* MESSAGE */}
         <div className="mb-6">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Your Message
-          </label>
-          <textarea
-            name="message"
-            required
-            rows="5"
-            value={form.message}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none resize-none"
-            placeholder="Write your message..."
-          ></textarea>
+          <label className="block text-gray-700 font-semibold mb-2">Your Message</label>
+          <textarea name="message" required rows="5" value={form.message} onChange={handleChange}
+            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none resize-none"
+            placeholder="How can we help you today?"></textarea>
         </div>
 
         {/* FILE UPLOAD */}
         <div className="mb-6">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Upload File (Optional)
-          </label>
-
+          <label className="block text-gray-700 font-semibold mb-2">Upload File (Optional)</label>
           <div className="flex items-center gap-4">
-            <label
-              htmlFor="fileInput"
-              className="
-                px-5 py-3 bg-orange-600 text-white rounded-lg
-                cursor-pointer shadow hover:bg-orange-700 transition
-              "
-            >
+            <label htmlFor="fileInput"
+              className="px-5 py-3 bg-blue-600 text-white rounded-lg cursor-pointer shadow hover:bg-blue-700 transition">
               Choose File
             </label>
-
-            <input
-              id="fileInput"
-              type="file"
-              className="hidden"
-              onChange={handleFileUpload}
-            />
-
-            <span className="text-gray-600">
-              {fileName || "No file selected"}
-            </span>
+            <input id="fileInput" type="file" className="hidden" onChange={handleFileUpload} />
+            <span className="text-gray-600 text-sm truncate max-w-xs">{fileName || "No file selected"}</span>
           </div>
         </div>
 
         {/* SUBMIT BUTTON */}
-        <button
-          type="submit"
-          className="
-            w-full py-4 text-lg font-semibold text-white
-            bg-orange-600 rounded-lg shadow-lg
-            hover:bg-orange-700 transition
-          "
-        >
+        <button type="submit"
+          className="w-full py-4 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 transition">
           Send Message
         </button>
       </form>
